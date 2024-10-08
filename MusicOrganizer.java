@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A class to hold details of audio tracks.
@@ -75,9 +76,16 @@ public class MusicOrganizer
      */
     public void listTrack(int index)
     {
+        if(validIndex(index) == true)
+        {
         System.out.print("Track " + index + ": ");
         Track track = tracks.get(index);
         System.out.println(track.getDetails());
+        }
+        else
+        {
+            System.out.println("Valid range must be between 0 and " + (tracks.size()-1));
+        }
     }
     
     /**
@@ -112,8 +120,13 @@ public class MusicOrganizer
      */
     public void removeTrack(int index)
     {
-        if(indexValid(index)) {
+        if(validIndex(index) == true)
+        {
             tracks.remove(index);
+        }
+        else
+        {
+            System.out.println("Valid range must be between 0 and " + (tracks.size()-1));
         }
     }
     
@@ -133,6 +146,58 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+    }
+    
+    /**
+     * random 
+     */
+    
+    public void shuffle()
+    {
+        Random shuffle = new Random();
+        if(tracks.size() > 0)
+        {
+            int randomTrack = shuffle.nextInt(tracks.size());
+            Track trackPlaying = tracks.get(randomTrack);
+            player.startPlaying(tracks.get((randomTrack)).getFilename());
+            System.out.println("Now Playing: " + trackPlaying.getDetails());
+        }
+        else
+        {
+            System.out.println("Track list is empty");
+        }
+    }
+    
+    /**
+     * shuffle all
+     */
+    
+    public void shuffleAll()
+    {
+        Random shuffle = new Random();
+        ArrayList<Track> randomTracks = new ArrayList<>(); 
+        int randomTrack = shuffle.nextInt(tracks.size());
+        
+        for(Track track : randomTracks)
+        {
+            player.startPlaying(randomTracks.get(randomTrack).getFilename());
+        }
+        
+    }
+    
+    /**
+     * validIndex
+     */
+    public boolean validIndex(int index)
+    {
+        if ((index >= 0) && (index <= tracks.size()-1))
+        {
+            return true;
+        }
+        else
+        {
+            return false; 
+        }
     }
 
     /**
