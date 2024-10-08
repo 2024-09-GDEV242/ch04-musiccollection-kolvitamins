@@ -175,16 +175,17 @@ public class MusicOrganizer
     public void shuffleAll()
     {
         Random shuffle = new Random();
+        ArrayList<Track> randomTracks = tracks;
         int randomTrack = shuffle.nextInt(tracks.size());
         Track trackPlaying = tracks.get(randomTrack);
         
-        for(Track track : tracks)
+        for(Track track : randomTracks)
         {
             player.startPlaying(tracks.get(randomTrack).getFilename());
-            tracks.remove(randomTrack);
             System.out.println("Now Playing: " + trackPlaying.getDetails());
+            tracks.remove(randomTrack);
         }
-        
+    
     }
     
     /**
