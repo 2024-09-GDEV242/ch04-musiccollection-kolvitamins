@@ -194,7 +194,7 @@ public class MusicOrganizer
             {
                 int randomTrack = shuffle.nextInt(randomTracks.size());
                 Track trackPlaying = randomTracks.remove(randomTrack);
-                player.playSample(trackPlaying.getFilename());
+                player.playWhole(trackPlaying.getFilename());
             }
         }
          else

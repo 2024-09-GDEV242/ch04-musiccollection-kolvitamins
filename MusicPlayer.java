@@ -36,6 +36,25 @@ public class MusicPlayer
     {
         try {
             setupPlayer(filename);
+            player.play(500);
+        }
+        catch(JavaLayerException e) {
+            reportProblem(filename);
+        }
+        finally {
+            killPlayer();
+        }
+    }
+    
+    /**
+     * Play the whole of a given file.
+     * the method returns once it is finished playing
+     * @param filename the file to be played.
+     */
+    public void playWhole(String filename)
+    {
+        try{
+            setupPlayer(filename);
             player.play(5000);
         }
         catch(JavaLayerException e) {
